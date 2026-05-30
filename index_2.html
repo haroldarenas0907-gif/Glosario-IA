@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glosario de IA — Fundación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --border: #E2DDD5;
+    --text: #1A1714;
+    --text2: #6B6460;
+    --text3: #9C9490;
+    --purple: #5B4AE8;
+    --purple-light: #EEEbff;
+    --purple-mid: #C4BCFF;
+    --teal: #0D9E75;
+    --teal-light: #E0F5EE;
+    --coral: #D85A30;
+    --coral-light: #FAECE7;
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --amber: #854F0B;
+    --amber-light: #FAEEDA;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--text);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 120%, #5B4AE820 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(91,74,232,0.18);
+    border: 0.5px solid rgba(91,74,232,0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 1rem;
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 span {
+    color: var(--purple-mid);
+  }
+
+  header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.25rem 2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    pointer-events: none;
+  }
+
+  #search {
+    width: 100%;
+    padding: 13px 16px 13px 44px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+  }
+
+  #search:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(91,74,232,0.1);
+  }
+
+  #search::placeholder { color: var(--text3); }
+
+  /* ── FILTERS ── */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+  }
+
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .filter-btn:hover { border-color: var(--purple-mid); color: var(--purple); }
+
+  .filter-btn.active {
+    background: var(--purple-light);
+    border-color: var(--purple-mid);
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  .filter-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  /* ── COUNT ── */
+  .result-count {
+    font-size: 13px;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+
+  .card:hover {
+    border-color: #C4BCFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .card.open { border-color: var(--purple); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 19px;
+  }
+
+  .icon-purple { background: var(--purple-light); color: var(--purple); }
+  .icon-teal   { background: var(--teal-light);   color: var(--teal); }
+  .icon-coral  { background: var(--coral-light);  color: var(--coral); }
+  .icon-blue   { background: var(--blue-light);   color: var(--blue); }
+  .icon-amber  { background: var(--amber-light);  color: var(--amber); }
+
+  .card-meta { flex: 1; min-width: 0; }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+  }
+
+  .tag-agente        { background: var(--purple-light); color: var(--purple); }
+  .tag-herramienta   { background: var(--teal-light);   color: var(--teal); }
+  .tag-plataforma    { background: var(--blue-light);   color: var(--blue); }
+  .tag-concepto      { background: var(--amber-light);  color: var(--amber); }
+  .tag-infraestructura { background: var(--coral-light); color: var(--coral); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+  }
+
+  .card-arrow {
+    font-size: 18px;
+    color: var(--text3);
+    transition: transform .2s, color .15s;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .card.open .card-arrow { transform: rotate(90deg); color: var(--purple); }
+
+  /* ── CARD BODY ── */
+  .card-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    animation: fadeIn .2s ease;
+  }
+
+  .card.open .card-body { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  .card-def {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.75;
+    padding-top: 1rem;
+  }
+
+  .card-bullets {
+    list-style: none;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .card-bullets li {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.55;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .card-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--purple);
+    font-weight: 700;
+  }
+
+  /* ── EMPTY ── */
+  .empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text3);
+    font-size: 15px;
+    grid-column: 1/-1;
+  }
+
+  .empty svg { display: block; margin: 0 auto 12px; opacity: 0.35; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats-bar { gap: 1.25rem; }
+    header { padding: 2rem 1.25rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+    Fundación · Recursos de IA
+  </div>
+  <h1>Glosario de <span>Inteligencia Artificial</span></h1>
+  <p>Definiciones esenciales sobre IA, agentes y herramientas para el equipo</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num" id="total-count">18</div><div class="stat-label">Términos</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Categorías</div></div>
+  <div class="stat"><div class="stat-num">2025</div><div class="stat-label">Actualizado</div></div>
+</div>
+
+<main class="main">
+
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Buscar término o definición…">
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all"><span class="filter-dot" style="background:#5B4AE8"></span>Todos</button>
+    <button class="filter-btn" data-cat="agente"><span class="filter-dot" style="background:#5B4AE8"></span>Agentes</button>
+    <button class="filter-btn" data-cat="plataforma"><span class="filter-dot" style="background:#185FA5"></span>Plataformas</button>
+    <button class="filter-btn" data-cat="herramienta"><span class="filter-dot" style="background:#0D9E75"></span>Herramientas</button>
+    <button class="filter-btn" data-cat="concepto"><span class="filter-dot" style="background:#854F0B"></span>Conceptos</button>
+    <button class="filter-btn" data-cat="infraestructura"><span class="filter-dot" style="background:#D85A30"></span>Infraestructura</button>
+  </div>
+
+  <p class="result-count" id="result-count"></p>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>Glosario de IA · Fundación · Uso interno &nbsp;·&nbsp; Actualizado 2025</footer>
+
+<script>
+const terms = [
+  { title:"Agente de IA", cat:"agente", icon:"🤖", iconClass:"icon-purple", tag:"Agente",
+    def:"Un agente de IA es un programa autónomo que percibe su entorno, toma decisiones y ejecuta acciones para lograr un objetivo específico, sin necesidad de instrucciones paso a paso por parte de un humano.",
+    bullets:["Puede planificar y actuar de forma autónoma","Recibe entradas (texto, datos, imágenes) y genera respuestas o acciones","Puede usar herramientas externas: búsqueda web, APIs, bases de datos","Ejemplo: un agente que responde correos, agenda reuniones o analiza documentos automáticamente"] },
+  { title:"Sistema multiagente", cat:"agente", icon:"🔗", iconClass:"icon-purple", tag:"Agente",
+    def:"Un sistema multiagente (SMA) es una arquitectura en la que múltiples agentes de IA trabajan en conjunto, comunicándose y colaborando para resolver tareas complejas que un solo agente no podría manejar eficientemente.",
+    bullets:["Cada agente tiene un rol o especialidad distinta","Los agentes pueden coordinarse, negociar o dividir el trabajo","Permite paralelismo: varias tareas al mismo tiempo","Aumenta la robustez del sistema ante fallos individuales"] },
+  { title:"¿Para qué sirve un sistema multiagente?", cat:"agente", icon:"⚙️", iconClass:"icon-purple", tag:"Agente",
+    def:"Los sistemas multiagente permiten automatizar procesos completos de extremo a extremo, distribuyendo la carga entre agentes especializados.",
+    bullets:["Atención al cliente con agentes de triaje, respuesta y escalamiento","Análisis de datos: un agente recopila, otro limpia, otro visualiza","Investigación automatizada: búsqueda, síntesis y redacción de informes","En la Fundación: gestión de beneficiarios, informes de impacto, capacitaciones"] },
+  { title:"Droid", cat:"herramienta", icon:"🛠️", iconClass:"icon-teal", tag:"Herramienta",
+    def:"Droid es una plataforma o framework para construir, desplegar y gestionar agentes de IA. Permite crear flujos de trabajo automatizados con agentes que interactúan con herramientas, APIs y bases de datos.",
+    bullets:["Orientado a la creación rápida de agentes sin mucho código","Integra modelos de lenguaje (LLM) con herramientas externas","Permite diseñar flujos conversacionales y de automatización","Diferencia clave con Claude: Droid es la infraestructura; Claude es el cerebro (modelo de lenguaje)"] },
+  { title:"Fake bot", cat:"concepto", icon:"⚠️", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un fake bot (bot falso) es un sistema que simula ser un agente de IA real, pero ejecuta respuestas predefinidas, scripts o reglas fijas, sin inteligencia generativa ni comprensión real del lenguaje.",
+    bullets:["Basado en árboles de decisión o respuestas tipo FAQ","No aprende ni generaliza — solo responde lo programado","Útil para casos simples y repetitivos de bajo costo","Riesgo: los usuarios pueden frustrarse ante preguntas fuera del guión"] },
+  { title:"Repositorio (GitHub)", cat:"infraestructura", icon:"📁", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"Un repositorio es un espacio de almacenamiento versionado donde se guarda el código fuente de un proyecto, junto con su historial de cambios, documentación y archivos de configuración.",
+    bullets:["Permite trabajar en equipo sin sobrescribir el trabajo de otros","Registra quién hizo qué cambio y cuándo","Facilita volver a versiones anteriores si algo falla","En proyectos de IA: guarda prompts, flujos, scripts y configuraciones de agentes"] },
+  { title:"GitHub", cat:"infraestructura", icon:"🐙", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"GitHub es la plataforma más popular para alojar repositorios de código usando el sistema de control de versiones Git. Funciona como una red social y espacio colaborativo para desarrolladores.",
+    bullets:["Permite crear ramas (branches) para desarrollar funcionalidades sin afectar el código principal","Pull Request: proceso para integrar cambios revisados","Issues: sistema de seguimiento de tareas y errores","GitHub Actions: automatización de pruebas y despliegues (CI/CD)"] },
+  { title:"Cómo funciona GitHub", cat:"infraestructura", icon:"🔄", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"GitHub funciona sobre Git, un sistema de control de versiones distribuido. Cada colaborador tiene una copia local del repositorio y puede sincronizar cambios con el repositorio remoto.",
+    bullets:["Clone: descargar el repositorio a tu computador","Commit: guardar un conjunto de cambios con un mensaje descriptivo","Push: enviar tus commits al repositorio remoto en GitHub","Pull: traer los cambios más recientes del repositorio remoto a tu copia local"] },
+  { title:"Claude vs Droid", cat:"concepto", icon:"⚡", iconClass:"icon-amber", tag:"Concepto",
+    def:"Claude y Droid cumplen roles complementarios pero distintos dentro de un ecosistema de IA.",
+    bullets:["Claude: modelo de lenguaje (LLM) de Anthropic — es el 'cerebro' que entiende, razona y genera texto","Droid: plataforma para orquestar agentes — es la 'infraestructura' que conecta Claude con herramientas","Claude puede correr dentro de Droid como el motor cognitivo de un agente","Analogía: Claude es el motor; Droid es el chasis y la carrocería del vehículo"] },
+  { title:"Open Cloud / Nube abierta", cat:"plataforma", icon:"☁️", iconClass:"icon-blue", tag:"Plataforma",
+    def:"Open Cloud (o nube abierta) se refiere a infraestructuras y servicios de computación en la nube basados en estándares abiertos, interoperables y sin dependencia exclusiva de un único proveedor.",
+    bullets:["Basado en tecnologías open source como OpenStack, Kubernetes, Linux","Permite migrar cargas de trabajo entre AWS, Google Cloud, Azure y servidores propios","Reduce costos al evitar licencias propietarias","Para agentes de IA: permite desplegar modelos en infraestructura propia o multi-nube"] },
+  { title:"Sesión de uso en Ollama", cat:"herramienta", icon:"💻", iconClass:"icon-teal", tag:"Herramienta",
+    def:"Ollama es una herramienta que permite ejecutar modelos de lenguaje (LLM) de forma local en tu propio computador o servidor. Una sesión de uso es el período activo de interacción con el modelo.",
+    bullets:["Durante la sesión, el modelo permanece en memoria RAM/GPU para respuestas rápidas","Al cerrar la sesión, el modelo se descarga liberando recursos","Las conversaciones no persisten entre sesiones por defecto (sin memoria)","Ventaja: privacidad total — los datos nunca salen de tu infraestructura"] },
+  { title:"Sistema predictivo de agentes", cat:"agente", icon:"📈", iconClass:"icon-purple", tag:"Agente",
+    def:"Un sistema predictivo de agentes combina modelos de machine learning para anticipar comportamientos, necesidades o resultados futuros, integrando esas predicciones en las decisiones de uno o varios agentes.",
+    bullets:["Predice cuándo un beneficiario necesitará apoyo antes de que lo solicite","Anticipa picos de demanda en servicios de la Fundación","Agentes que ajustan su comportamiento según probabilidades de éxito","Ejemplo: sistema que detecta riesgo de deserción y activa un agente de seguimiento"] },
+  { title:"Capacitaciones con agentes de IA", cat:"concepto", icon:"🎓", iconClass:"icon-amber", tag:"Concepto",
+    def:"Usar un agente de IA como facilitador o tutor en procesos de formación permite personalizar el aprendizaje, escalar el alcance de las capacitaciones y brindar disponibilidad 24/7 sin requerir un instructor humano en todo momento.",
+    bullets:["El agente adapta el contenido al nivel y ritmo de cada persona","Genera preguntas, evaluaciones y retroalimentación instantánea","Registra el progreso y detecta temas con mayor dificultad","En la Fundación: capacitación de voluntarios, beneficiarios o aliados a escala"] },
+  { title:"Skill (habilidad de agente)", cat:"agente", icon:"🧩", iconClass:"icon-purple", tag:"Agente",
+    def:"En el contexto de agentes de IA, un skill (habilidad) es una capacidad específica y modular que puede ser asignada a un agente para que realice una tarea determinada.",
+    bullets:["Son como 'módulos plug-and-play' que amplían lo que el agente puede hacer","Ejemplos: skill de búsqueda web, skill de lectura de PDF, skill de escritura de código","Un agente puede tener múltiples skills activos simultáneamente","Permiten especializar agentes sin reprogramarlos desde cero"] },
+  { title:"Modelo de lenguaje (LLM)", cat:"concepto", icon:"🧠", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un Large Language Model (LLM) es un sistema de IA entrenado con enormes volúmenes de texto para comprender y generar lenguaje humano de forma coherente y contextual.",
+    bullets:["Aprende patrones del lenguaje a partir de miles de millones de textos","Puede responder preguntas, redactar, resumir, traducir y razonar","Ejemplos: Claude (Anthropic), GPT-4 (OpenAI), Gemini (Google)","La calidad de la respuesta depende del prompt (instrucción) que recibe"] },
+  { title:"Prompt", cat:"concepto", icon:"💬", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un prompt es la instrucción, pregunta o contexto que se le proporciona a un modelo de IA para guiar su respuesta. Es el punto de partida de toda interacción con un LLM.",
+    bullets:["Un buen prompt es claro, específico y provee contexto relevante","Prompt engineering: disciplina de diseñar prompts efectivos","Sistema prompt: instrucciones de comportamiento permanentes del agente","Ejemplo: 'Eres un asistente de la Fundación. Responde en español, con tono empático.'"] },
+  { title:"RAG — Generación aumentada por recuperación", cat:"concepto", icon:"🔍", iconClass:"icon-amber", tag:"Concepto",
+    def:"RAG (Retrieval-Augmented Generation) es una técnica que combina un LLM con una base de conocimiento externa, permitiendo al modelo buscar información actualizada antes de generar su respuesta.",
+    bullets:["Soluciona el problema de que los LLM tienen fecha de corte de conocimiento","El agente primero recupera documentos relevantes, luego los usa para responder","Permite que el agente responda con datos propios de la organización","En la Fundación: un agente RAG puede responder sobre políticas internas o beneficiarios"] },
+  { title:"API", cat:"infraestructura", icon:"🔌", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"Una API (Application Programming Interface) es un conjunto de reglas que permite que dos sistemas de software se comuniquen entre sí, intercambiando datos y funcionalidades de forma estandarizada.",
+    bullets:["Permite que un agente de IA use servicios externos (enviar emails, consultar bases de datos)","Las APIs de LLM permiten integrar Claude, GPT u otros modelos en cualquier aplicación","Requiere autenticación mediante claves (API keys)","Ejemplo: la Fundación podría conectar su sistema de gestión con un agente vía API"] }
+];
+
+let activeCat = 'all';
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const filtered = terms.filter(t => {
+    const matchCat = activeCat === 'all' || t.cat === activeCat;
+    const matchQ = !q || t.title.toLowerCase().includes(q) || t.def.toLowerCase().includes(q) || t.bullets.some(b => b.toLowerCase().includes(q));
+    return matchCat && matchQ;
+  });
+
+  document.getElementById('result-count').textContent = filtered.length + ' término' + (filtered.length !== 1 ? 's' : '') + (q || activeCat !== 'all' ? ' encontrados' : ' en total');
+  document.getElementById('total-count').textContent = terms.length;
+
+  const grid = document.getElementById('grid');
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>No se encontraron términos</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((t, i) => `
+    <div class="card" id="card-${i}" onclick="toggle(${i})">
+      <div class="card-header">
+        <div class="card-icon ${t.iconClass}">${t.icon}</div>
+        <div class="card-meta">
+          <span class="card-tag tag-${t.cat}">${t.tag}</span>
+          <p class="card-title">${t.title}</p>
+        </div>
+        <span class="card-arrow">›</span>
+      </div>
+      <div class="card-body">
+        <p class="card-def">${t.def}</p>
+        <ul class="card-bullets">${t.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggle(i) {
+  document.getElementById('card-' + i).classList.toggle('open');
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
