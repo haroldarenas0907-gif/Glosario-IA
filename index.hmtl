@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harold Arenas · Glosario de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0D0F;
+  --bg2: #141417;
+  --bg3: #1C1C21;
+  --surface: #1E1E24;
+  --border: #2A2A33;
+  --border2: #35353F;
+  --text: #F2F0EC;
+  --text2: #9B9896;
+  --text3: #5A5856;
+  --purple: #7C6EF5;
+  --purple2: #9D93F8;
+  --purple-bg: rgba(124,110,245,0.12);
+  --purple-border: rgba(124,110,245,0.3);
+  --teal: #2CC98A;
+  --teal-bg: rgba(44,201,138,0.1);
+  --coral: #F07050;
+  --coral-bg: rgba(240,112,80,0.1);
+  --blue: #4A9EE8;
+  --blue-bg: rgba(74,158,232,0.1);
+  --amber: #E8A43A;
+  --amber-bg: rgba(232,164,58,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,13,15,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: all .15s;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover { color: var(--text); background: var(--surface); }
+
+.nav-cta {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--purple);
+  text-decoration: none;
+  transition: opacity .15s;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--purple-bg);
+  border: 1px solid var(--purple-border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple2);
+  margin-bottom: 1.25rem;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.hero h1 .accent { color: var(--purple2); }
+
+.hero-desc {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--purple);
+  text-decoration: none;
+  transition: opacity .15s, transform .15s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  text-decoration: none;
+  transition: all .15s;
+  cursor: pointer;
+}
+
+.btn-secondary:hover { color: var(--text); border-color: var(--border2); background: var(--bg3); }
+
+/* ── AVATAR CARD ── */
+.hero-right {}
+
+.profile-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  width: 220px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--purple), var(--teal));
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--purple-bg);
+  border: 2px solid var(--purple-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--purple2);
+  margin: 0 auto 1rem;
+}
+
+.profile-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.profile-role {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.profile-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: border-color .15s;
+}
+
+.contact-item:hover { border-color: var(--purple-border); }
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.ci-linkedin { background: rgba(10,102,194,0.2); }
+.ci-whatsapp { background: rgba(37,211,102,0.2); }
+
+.contact-text {
+  font-size: 11px;
+  color: var(--text2);
+  text-align: left;
+  line-height: 1.3;
+}
+
+.contact-label {
+  font-size: 10px;
+  color: var(--text3);
+  display: block;
+}
+
+/* ── STATS ── */
+.stats {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--purple2);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 4px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ── GLOSSARY SECTION ── */
+.glossary {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple2);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.search-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+}
+
+#search {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+}
+
+#search:focus { border-color: var(--purple); }
+#search::placeholder { color: var(--text3); }
+
+.filters {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.filter-btn:hover { border-color: var(--purple-border); color: var(--purple2); }
+
+.filter-btn.active {
+  background: var(--purple-bg);
+  border-color: var(--purple-border);
+  color: var(--purple2);
+  font-weight: 500;
+}
+
+.filter-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+.result-count {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .15s, transform .15s;
+}
+
+.card:hover { border-color: var(--border2); transform: translateY(-1px); }
+.card.open { border-color: var(--purple-border); }
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 1rem 1.1rem;
+}
+
+.card-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.icon-purple { background: var(--purple-bg); }
+.icon-teal   { background: var(--teal-bg); }
+.icon-coral  { background: var(--coral-bg); }
+.icon-blue   { background: var(--blue-bg); }
+.icon-amber  { background: var(--amber-bg); }
+
+.card-meta { flex: 1; min-width: 0; }
+
+.card-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+}
+
+.tag-agente          { background: var(--purple-bg);  color: var(--purple2); }
+.tag-herramienta     { background: var(--teal-bg);    color: var(--teal); }
+.tag-plataforma      { background: var(--blue-bg);    color: var(--blue); }
+.tag-concepto        { background: var(--amber-bg);   color: var(--amber); }
+.tag-infraestructura { background: var(--coral-bg);   color: var(--coral); }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.card-arrow {
+  font-size: 16px;
+  color: var(--text3);
+  transition: transform .2s, color .15s;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.card.open .card-arrow { transform: rotate(90deg); color: var(--purple2); }
+
+.card-body {
+  display: none;
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--border);
+  animation: fadeIn .2s ease;
+}
+
+.card.open .card-body { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+.card-def {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+  padding-top: 0.9rem;
+}
+
+.card-bullets {
+  list-style: none;
+  margin-top: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-bullets li {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.55;
+  padding-left: 14px;
+  position: relative;
+}
+
+.card-bullets li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text3);
+  font-size: 14px;
+  grid-column: 1/-1;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left {
+  font-size: 13px;
+  color: var(--text3);
+}
+
+.footer-left strong { color: var(--text2); }
+
+.footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text3);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  transition: all .15s;
+}
+
+.footer-link:hover { color: var(--purple2); border-color: var(--purple-border); }
+
+@media (max-width: 680px) {
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-right { display: flex; justify-content: center; }
+  .profile-card { width: 100%; max-width: 320px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    Harold Arenas · IA
+  </a>
+  <div class="nav-links">
+    <a href="#glosario" class="nav-link">Glosario</a>
+    <a href="https://www.linkedin.com/in/haroldarenas0907" target="_blank" class="nav-link">LinkedIn</a>
+    <a href="https://wa.me/573188997364" target="_blank" class="nav-cta">Contactar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Recurso de inteligencia artificial
+    </div>
+    <h1>Glosario de<br><span class="accent">Inteligencia Artificial</span></h1>
+    <p class="hero-desc">Definiciones esenciales sobre IA, agentes y herramientas para equipos del sector social y filantrópico. Elaborado por Harold Arenas, Coordinador de Planeación y Proyectos.</p>
+    <div class="hero-actions">
+      <a href="#glosario" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Ver glosario
+      </a>
+      <a href="https://wa.me/573188997364" target="_blank" class="btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="profile-card">
+      <div class="avatar">HA</div>
+      <p class="profile-name">Harold Arenas</p>
+      <p class="profile-role">Coordinador de área<br>Planeación y Proyectos</p>
+      <div class="profile-contacts">
+        <a href="https://www.linkedin.com/in/haroldarenas0907" target="_blank" class="contact-item">
+          <div class="contact-icon ci-linkedin">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div class="contact-text">
+            <span class="contact-label">LinkedIn</span>
+            Harold Arenas
+          </div>
+        </a>
+        <a href="https://wa.me/573188997364" target="_blank" class="contact-item">
+          <div class="contact-icon ci-whatsapp">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </div>
+          <div class="contact-text">
+            <span class="contact-label">WhatsApp</span>
+            318 899 7364
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-num">18</div>
+    <div class="stat-label">Términos</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Categorías</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Gratuito</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">2025</div>
+    <div class="stat-label">Actualizado</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- GLOSSARY -->
+<section class="glossary" id="glosario">
+  <p class="section-label">Referencia técnica</p>
+  <h2 class="section-title">Términos de IA</h2>
+
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Buscar término o definición…">
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all"><span class="filter-dot" style="background:var(--purple)"></span>Todos</button>
+    <button class="filter-btn" data-cat="agente"><span class="filter-dot" style="background:var(--purple)"></span>Agentes</button>
+    <button class="filter-btn" data-cat="plataforma"><span class="filter-dot" style="background:var(--blue)"></span>Plataformas</button>
+    <button class="filter-btn" data-cat="herramienta"><span class="filter-dot" style="background:var(--teal)"></span>Herramientas</button>
+    <button class="filter-btn" data-cat="concepto"><span class="filter-dot" style="background:var(--amber)"></span>Conceptos</button>
+    <button class="filter-btn" data-cat="infraestructura"><span class="filter-dot" style="background:var(--coral)"></span>Infraestructura</button>
+  </div>
+
+  <p class="result-count" id="result-count"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    Elaborado por <strong>Harold Arenas</strong> · Coordinador de Planeación y Proyectos · 2025
+  </div>
+  <div class="footer-right">
+    <a href="https://www.linkedin.com/in/haroldarenas0907" target="_blank" class="footer-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://wa.me/573188997364" target="_blank" class="footer-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</footer>
+
+<script>
+const terms = [
+  { title:"Agente de IA", cat:"agente", icon:"🤖", iconClass:"icon-purple", tag:"Agente",
+    def:"Un agente de IA es un programa autónomo que percibe su entorno, toma decisiones y ejecuta acciones para lograr un objetivo específico, sin necesidad de instrucciones paso a paso por parte de un humano.",
+    bullets:["Puede planificar y actuar de forma autónoma","Recibe entradas (texto, datos, imágenes) y genera respuestas o acciones","Puede usar herramientas externas: búsqueda web, APIs, bases de datos","Ejemplo: un agente que responde correos, agenda reuniones o analiza documentos automáticamente"] },
+  { title:"Sistema multiagente", cat:"agente", icon:"🔗", iconClass:"icon-purple", tag:"Agente",
+    def:"Un sistema multiagente (SMA) es una arquitectura en la que múltiples agentes de IA trabajan en conjunto, comunicándose y colaborando para resolver tareas complejas que un solo agente no podría manejar eficientemente.",
+    bullets:["Cada agente tiene un rol o especialidad distinta","Los agentes pueden coordinarse, negociar o dividir el trabajo","Permite paralelismo: varias tareas al mismo tiempo","Aumenta la robustez del sistema ante fallos individuales"] },
+  { title:"¿Para qué sirve un sistema multiagente?", cat:"agente", icon:"⚙️", iconClass:"icon-purple", tag:"Agente",
+    def:"Los sistemas multiagente permiten automatizar procesos completos de extremo a extremo, distribuyendo la carga entre agentes especializados.",
+    bullets:["Atención al cliente con agentes de triaje, respuesta y escalamiento","Análisis de datos: un agente recopila, otro limpia, otro visualiza","Investigación automatizada: búsqueda, síntesis y redacción de informes","En la Fundación: gestión de beneficiarios, informes de impacto, capacitaciones"] },
+  { title:"Droid", cat:"herramienta", icon:"🛠️", iconClass:"icon-teal", tag:"Herramienta",
+    def:"Droid es una plataforma o framework para construir, desplegar y gestionar agentes de IA. Permite crear flujos de trabajo automatizados con agentes que interactúan con herramientas, APIs y bases de datos.",
+    bullets:["Orientado a la creación rápida de agentes sin mucho código","Integra modelos de lenguaje (LLM) con herramientas externas","Permite diseñar flujos conversacionales y de automatización","Diferencia clave con Claude: Droid es la infraestructura; Claude es el cerebro (modelo de lenguaje)"] },
+  { title:"Fake bot", cat:"concepto", icon:"⚠️", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un fake bot (bot falso) es un sistema que simula ser un agente de IA real, pero ejecuta respuestas predefinidas, scripts o reglas fijas, sin inteligencia generativa ni comprensión real del lenguaje.",
+    bullets:["Basado en árboles de decisión o respuestas tipo FAQ","No aprende ni generaliza — solo responde lo programado","Útil para casos simples y repetitivos de bajo costo","Riesgo: los usuarios pueden frustrarse ante preguntas fuera del guión"] },
+  { title:"Repositorio (GitHub)", cat:"infraestructura", icon:"📁", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"Un repositorio es un espacio de almacenamiento versionado donde se guarda el código fuente de un proyecto, junto con su historial de cambios, documentación y archivos de configuración.",
+    bullets:["Permite trabajar en equipo sin sobrescribir el trabajo de otros","Registra quién hizo qué cambio y cuándo","Facilita volver a versiones anteriores si algo falla","En proyectos de IA: guarda prompts, flujos, scripts y configuraciones de agentes"] },
+  { title:"GitHub", cat:"infraestructura", icon:"🐙", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"GitHub es la plataforma más popular para alojar repositorios de código usando el sistema de control de versiones Git. Funciona como una red social y espacio colaborativo para desarrolladores.",
+    bullets:["Permite crear ramas (branches) para desarrollar funcionalidades sin afectar el código principal","Pull Request: proceso para integrar cambios revisados","Issues: sistema de seguimiento de tareas y errores","GitHub Actions: automatización de pruebas y despliegues (CI/CD)"] },
+  { title:"Cómo funciona GitHub", cat:"infraestructura", icon:"🔄", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"GitHub funciona sobre Git, un sistema de control de versiones distribuido. Cada colaborador tiene una copia local del repositorio y puede sincronizar cambios con el repositorio remoto.",
+    bullets:["Clone: descargar el repositorio a tu computador","Commit: guardar un conjunto de cambios con un mensaje descriptivo","Push: enviar tus commits al repositorio remoto en GitHub","Pull: traer los cambios más recientes del repositorio remoto a tu copia local"] },
+  { title:"Claude vs Droid", cat:"concepto", icon:"⚡", iconClass:"icon-amber", tag:"Concepto",
+    def:"Claude y Droid cumplen roles complementarios pero distintos dentro de un ecosistema de IA.",
+    bullets:["Claude: modelo de lenguaje (LLM) de Anthropic — es el 'cerebro' que entiende, razona y genera texto","Droid: plataforma para orquestar agentes — es la 'infraestructura' que conecta Claude con herramientas","Claude puede correr dentro de Droid como el motor cognitivo de un agente","Analogía: Claude es el motor; Droid es el chasis y la carrocería del vehículo"] },
+  { title:"Open Cloud / Nube abierta", cat:"plataforma", icon:"☁️", iconClass:"icon-blue", tag:"Plataforma",
+    def:"Open Cloud (o nube abierta) se refiere a infraestructuras y servicios de computación en la nube basados en estándares abiertos, interoperables y sin dependencia exclusiva de un único proveedor.",
+    bullets:["Basado en tecnologías open source como OpenStack, Kubernetes, Linux","Permite migrar cargas de trabajo entre AWS, Google Cloud, Azure y servidores propios","Reduce costos al evitar licencias propietarias","Para agentes de IA: permite desplegar modelos en infraestructura propia o multi-nube"] },
+  { title:"Sesión de uso en Ollama", cat:"herramienta", icon:"💻", iconClass:"icon-teal", tag:"Herramienta",
+    def:"Ollama es una herramienta que permite ejecutar modelos de lenguaje (LLM) de forma local en tu propio computador o servidor. Una sesión de uso es el período activo de interacción con el modelo.",
+    bullets:["Durante la sesión, el modelo permanece en memoria RAM/GPU para respuestas rápidas","Al cerrar la sesión, el modelo se descarga liberando recursos","Las conversaciones no persisten entre sesiones por defecto (sin memoria)","Ventaja: privacidad total — los datos nunca salen de tu infraestructura"] },
+  { title:"Sistema predictivo de agentes", cat:"agente", icon:"📈", iconClass:"icon-purple", tag:"Agente",
+    def:"Un sistema predictivo de agentes combina modelos de machine learning para anticipar comportamientos, necesidades o resultados futuros, integrando esas predicciones en las decisiones de uno o varios agentes.",
+    bullets:["Predice cuándo un beneficiario necesitará apoyo antes de que lo solicite","Anticipa picos de demanda en servicios de la Fundación","Agentes que ajustan su comportamiento según probabilidades de éxito","Ejemplo: sistema que detecta riesgo de deserción y activa un agente de seguimiento"] },
+  { title:"Capacitaciones con agentes de IA", cat:"concepto", icon:"🎓", iconClass:"icon-amber", tag:"Concepto",
+    def:"Usar un agente de IA como facilitador o tutor en procesos de formación permite personalizar el aprendizaje, escalar el alcance de las capacitaciones y brindar disponibilidad 24/7 sin requerir un instructor humano en todo momento.",
+    bullets:["El agente adapta el contenido al nivel y ritmo de cada persona","Genera preguntas, evaluaciones y retroalimentación instantánea","Registra el progreso y detecta temas con mayor dificultad","En la Fundación: capacitación de voluntarios, beneficiarios o aliados a escala"] },
+  { title:"Skill (habilidad de agente)", cat:"agente", icon:"🧩", iconClass:"icon-purple", tag:"Agente",
+    def:"En el contexto de agentes de IA, un skill (habilidad) es una capacidad específica y modular que puede ser asignada a un agente para que realice una tarea determinada.",
+    bullets:["Son como 'módulos plug-and-play' que amplían lo que el agente puede hacer","Ejemplos: skill de búsqueda web, skill de lectura de PDF, skill de escritura de código","Un agente puede tener múltiples skills activos simultáneamente","Permiten especializar agentes sin reprogramarlos desde cero"] },
+  { title:"Modelo de lenguaje (LLM)", cat:"concepto", icon:"🧠", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un Large Language Model (LLM) es un sistema de IA entrenado con enormes volúmenes de texto para comprender y generar lenguaje humano de forma coherente y contextual.",
+    bullets:["Aprende patrones del lenguaje a partir de miles de millones de textos","Puede responder preguntas, redactar, resumir, traducir y razonar","Ejemplos: Claude (Anthropic), GPT-4 (OpenAI), Gemini (Google)","La calidad de la respuesta depende del prompt (instrucción) que recibe"] },
+  { title:"Prompt", cat:"concepto", icon:"💬", iconClass:"icon-amber", tag:"Concepto",
+    def:"Un prompt es la instrucción, pregunta o contexto que se le proporciona a un modelo de IA para guiar su respuesta. Es el punto de partida de toda interacción con un LLM.",
+    bullets:["Un buen prompt es claro, específico y provee contexto relevante","Prompt engineering: disciplina de diseñar prompts efectivos","Sistema prompt: instrucciones de comportamiento permanentes del agente","Ejemplo: 'Eres un asistente de la Fundación. Responde en español, con tono empático.'"] },
+  { title:"RAG — Generación aumentada por recuperación", cat:"concepto", icon:"🔍", iconClass:"icon-amber", tag:"Concepto",
+    def:"RAG (Retrieval-Augmented Generation) es una técnica que combina un LLM con una base de conocimiento externa, permitiendo al modelo buscar información actualizada antes de generar su respuesta.",
+    bullets:["Soluciona el problema de que los LLM tienen fecha de corte de conocimiento","El agente primero recupera documentos relevantes, luego los usa para responder","Permite que el agente responda con datos propios de la organización","En la Fundación: un agente RAG puede responder sobre políticas internas o beneficiarios"] },
+  { title:"API", cat:"infraestructura", icon:"🔌", iconClass:"icon-coral", tag:"Infraestructura",
+    def:"Una API (Application Programming Interface) es un conjunto de reglas que permite que dos sistemas de software se comuniquen entre sí, intercambiando datos y funcionalidades de forma estandarizada.",
+    bullets:["Permite que un agente de IA use servicios externos (enviar emails, consultar bases de datos)","Las APIs de LLM permiten integrar Claude, GPT u otros modelos en cualquier aplicación","Requiere autenticación mediante claves (API keys)","Ejemplo: la Fundación podría conectar su sistema de gestión con un agente vía API"] }
+];
+
+let activeCat = 'all';
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const filtered = terms.filter(t => {
+    const matchCat = activeCat === 'all' || t.cat === activeCat;
+    const matchQ = !q || t.title.toLowerCase().includes(q) || t.def.toLowerCase().includes(q) || t.bullets.some(b => b.toLowerCase().includes(q));
+    return matchCat && matchQ;
+  });
+
+  document.getElementById('result-count').textContent = filtered.length + ' término' + (filtered.length !== 1 ? 's' : '') + (q || activeCat !== 'all' ? ' encontrados' : ' en total');
+
+  const grid = document.getElementById('grid');
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty">No se encontraron términos para esa búsqueda</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((t, i) => `
+    <div class="card" id="card-${i}" onclick="toggle(${i})">
+      <div class="card-header">
+        <div class="card-icon ${t.iconClass}">${t.icon}</div>
+        <div class="card-meta">
+          <span class="card-tag tag-${t.cat}">${t.tag}</span>
+          <p class="card-title">${t.title}</p>
+        </div>
+        <span class="card-arrow">›</span>
+      </div>
+      <div class="card-body">
+        <p class="card-def">${t.def}</p>
+        <ul class="card-bullets">${t.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggle(i) {
+  document.getElementById('card-' + i).classList.toggle('open');
+}
+
+document.getElementById('search').addEventListener('input', render);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
